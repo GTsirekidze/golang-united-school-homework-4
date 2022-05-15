@@ -21,7 +21,7 @@ func StringSum(input string) (output string, err error) {
 	t = strings.TrimSpace(t)
 
 	if len(t) == 0 {
-		return "", errorEmptyInput
+		return "", fmt.Errorf("error: %w", errorEmptyInput)
 	}
 
 	fmt.Println(t)
@@ -39,10 +39,10 @@ func StringSum(input string) (output string, err error) {
 
 		second, errSecond := strconv.Atoi(strings.TrimSpace(arr[len(arr)-1]))
 		if errFirst != nil {
-			return "", errFirst
+			return "", fmt.Errorf("error: %w", errFirst)
 		}
 		if errSecond != nil {
-			return "", errSecond
+			return "", fmt.Errorf("error: %w", errSecond)
 		}
 
 		if isFirstNegative {
@@ -59,13 +59,13 @@ func StringSum(input string) (output string, err error) {
 
 		second, errSecond := strconv.Atoi(strings.TrimSpace(arr[len(arr)-1]))
 		if errFirst != nil {
-			return "", errFirst
+			return "", fmt.Errorf("error: %w", errFirst)
 		}
 		if errSecond != nil {
-			return "", errSecond
+			return "", fmt.Errorf("error: %w", errSecond)
 		}
 		return strconv.Itoa(first + second), nil
 	}
 
-	return "", errorNotTwoOperands
+	return "", fmt.Errorf("error: %w", errorNotTwoOperands)
 }
