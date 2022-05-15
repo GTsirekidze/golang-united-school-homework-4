@@ -38,14 +38,17 @@ func StringSum(input string) (output string, err error) {
 		first, errFirst := strconv.Atoi(strings.TrimSpace(arr[len(arr)-2]))
 
 		second, errSecond := strconv.Atoi(strings.TrimSpace(arr[len(arr)-1]))
-
-		if errFirst == nil && errSecond == nil {
-			if isFirstNegative {
-				first *= -1
-			}
-			return strconv.Itoa(first - second), nil
+		if errFirst != nil {
+			return "", errFirst
+		}
+		if errSecond != nil {
+			return "", errSecond
 		}
 
+		if isFirstNegative {
+			first *= -1
+		}
+		return strconv.Itoa(first - second), nil
 	}
 
 	arr = strings.Split(t, "+")
@@ -55,10 +58,13 @@ func StringSum(input string) (output string, err error) {
 		first, errFirst := strconv.Atoi(strings.TrimSpace(arr[len(arr)-2]))
 
 		second, errSecond := strconv.Atoi(strings.TrimSpace(arr[len(arr)-1]))
-
-		if errFirst == nil && errSecond == nil {
-			return strconv.Itoa(first + second), nil
+		if errFirst != nil {
+			return "", errFirst
 		}
+		if errSecond != nil {
+			return "", errSecond
+		}
+		return strconv.Itoa(first + second), nil
 	}
 
 	return "", errorNotTwoOperands
